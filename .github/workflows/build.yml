@@ -1,0 +1,27 @@
+name: Build APK
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Agar poora project zip ki tarah upload hua ho to kholo
+        run: |
+          if [ ! -f settings.gradle ] && [ -f BenchSimApp.zip ]; then unzip -o BenchSimApp.zip; fi
+          ls
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
+      - name: Build debug APK
+        run: gradle assembleDebug --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: BenchSim-apk
+          path: app/build/outputs/apk/debug/*.apk
