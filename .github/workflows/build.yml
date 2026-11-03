@@ -39,7 +39,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          cp "$PROJECT_DIR/app/build/outputs/apk/debug/app-debug.apk" BenchSim.apk
-          gh release create "apk-${{ github.run_number }}" BenchSim.apk \
-            --title "BenchSim APK #${{ github.run_number }}" \
-            --notes "Debug APK. Download BenchSim.apk and install."
+          cp "$PROJECT_DIR/app/build/outputs/apk/debug/app-debug.apk" BenchSim-source.apk
+          gh release create "apk-${{ github.run_number }}" BenchSim-source.apk \
+            --title "BenchSim-source APK #${{ github.run_number }}" \
+            --notes "Debug APK. Download BenchSim-source.apk and install."
